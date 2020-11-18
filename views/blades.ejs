@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+	<div class="container">
+		
+		<div class="row mt-2">
+			<% blades.forEach((blade) => { %>
+				<div class="card m-3">
+					<a href="/blades/<%= blade._id %>">
+						<img class="card-img card-img-top" src="<%= blade.image_link %>" alt="Blade's picture">
+					</a>
+					<h3 class="card-title mt-3 blade-name"><%= blade.name %></h3>
+					<h5 class="values ml-2"><%= blade.element %></h5>
+					<h5 class="values ml-2"><%= blade.weapon_class %></h5>
+					<p class="card-text mb-3 mx-2"><%= blade.description %></p>
+				</div>
+			<% })%>
+		</div>
+	</div>
+<%- include("partials/footer") %>

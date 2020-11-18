@@ -1,0 +1,86 @@
+<%- include("partials/header") %>
+
+<div class="container">
+	<div class="row mt-4">
+		<div class="col-6 show_image-container">
+			<img src="<%= blade.image_link %>" alt="Blade's picture">
+		</div>
+		<div class="col-6 show_details-container">
+			<h1 class="blade-name"><%= blade.name %></h1>
+			<p><%= blade.description %></p>
+			<table class="table">
+			  <tbody>
+			    <tr>
+			      <th scope="row">Element</th>
+			      <td><%= blade.element %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Weapon Type</th>
+			      <td><%= blade.weapon_class %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Illustrator</th>
+			      <td><%= blade.illustrator %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Role</th>
+			      <td><%= blade.role %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">English Voice Actor</th>
+			      <td><%= blade.voice_actor_en %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Japanese Voice Actor</th>
+			      <td><%= blade.voice_actor_jp %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Merc Group Name</th>
+			      <td><%= blade.merc_group %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Aux Core Slots</th>
+			      <td><%= blade.aux_slots %></td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Gacha Blade?</th>
+			      <td><%= blade.gacha %></td>
+			    </tr>
+			  </tbody>
+			</table>
+			<a href="/blades/<%= blade._id %>/edit">
+				<button class="btn btn-outline-info btn-lg btn-block mb-2">Edit</button>
+			</a>
+			<form action="/blades/<%= blade._id %>?_method=DeLETE" method="post">
+				<button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
+			</form>
+		</div>
+	</div>
+	<div class="row show_comment-header mt-3">
+		COMMENT HEADER
+	</div>
+	<a href="/blades/<%= blade._id %>/comments/new">
+		<button class="btn btn-success btn-lg mb-4 mt-3">Add Comment</button>
+	</a>
+	<% comments.forEach((comment => { %>
+		<div class="row show_comment-container py-2 border">
+			<div class="col-2 border-right my-auto">
+				<%= comment.user.username %>
+			</div>
+			<div class="col-2 border-right my-auto d-flex flex-wrap justify-content-center">
+				<a class="btn btn-sm btn-success w-75 p-0 my-1" href="/blades/<%= blade._id %>/comments/<%= comment._id %>/edit">Edit</a>
+				<form class="w-75 my-1" action="/blades/<%= blade._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+					<button class="btn btn-sm btn-danger w-100 p-0">Delete</button>
+				</form>
+			</div>
+			<div class="col-8 my-auto">
+				<%= comment.text %>
+			</div>
+		</div>
+	<% })) %>
+	<div class="py-4">
+	</div>
+	
+</div>
+
+<%- include("partials/footer") %>

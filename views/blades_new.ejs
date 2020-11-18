@@ -1,0 +1,84 @@
+<%- include("partials/header") %>
+<div class="container">
+	<h1>Add new Blade</h1>
+	<form action="/blades" method="post">
+	  <div class="form-group">
+	    <label for="name">Blade Name</label>
+	    <input type="text" class="form-control" name="name" placeholder="e.g. Pyra" autofocus>
+	  </div>
+	  <div class="form-group">
+	    <label for="element">Element</label>
+	    <select class="form-control" id="element" name="element">
+			<option disabled selected>-- Choose Below --</option>
+			<option>Fire</option>
+			<option>Water</option>
+			<option>Ice</option>
+			<option>Wind</option>
+			<option>Earth</option>
+			<option>Electric</option>
+			<option>Light</option>
+			<option>Dark</option>
+		  </select>
+	  </div>
+	  <div class="form-group">
+	    <label for="weapon_class">Weapon Type</label>
+	    <input type="text" class="form-control" name="weapon_class">
+	  </div>
+	  <div class="form-group">
+	    <label for="description">Description</label>
+	    <input type="text" class="form-control" name="description">
+	  </div>
+	  <div class="form-group">
+	    <label for="illustrator">Illustrator</label>
+	    <input type="text" class="form-control" name="illustrator">
+	  </div>
+	  <div class="form-group">
+	    <label for="role">Role</label>
+	    <input type="text" class="form-control" name="role">
+	  </div>
+	  <div class="form-group">
+	    <label for="voice_actor_en">English Voice Actor</label>
+	    <input type="text" class="form-control" name="voice_actor_en">
+	  </div>
+	  <div class="form-group">
+	    <label for="voice_actor_jp">Japanese Voice Actor</label>
+	    <input type="text" class="form-control" name="voice_actor_jp">
+	  </div>
+	  <div class="form-group">
+	    <label for="merc_group">Merc Group Name</label>
+	    <input type="text" class="form-control" name="merc_group">
+	  </div>
+	  <div class="form-group">
+	    <label for="aux_slots">Aux Core Slots</label>
+	    <input type="number" class="form-control" name="aux_slots">
+	  </div>
+	  <div class="form-group form-check">
+	    <input type="checkbox" class="form-check-input" name="gacha">
+		<label for="gacha">Gacha Blade</label>
+	  </div>
+	  <div class="form-group">
+	    <label for="image">Image Link</label>
+	    <input type="text" class="form-control" name="image_link" placeholder="https://www.myimage.com">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>	
+</div>
+
+<!--<h1>Add New Blade</h1>
+	<form action="/blades" method="post">
+		<label for="name">Name</label>
+		<input type="text" name="name" autofocus>
+		<label for="element">Element</label>
+		<input type="text" name="element">
+		<label for="weapon_class">Weapon</label>
+		<input type="text" name="weapon_class">
+		<label for="description">Description</label>
+		<input type="text" name="description">
+		<label for="image">Image Link</label>
+		<input type="text" name="image">
+		<br />
+		<button type="submit">Submit</button>
+	</form> -->
+
+
+<%- include("partials/footer") %>

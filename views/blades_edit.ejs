@@ -1,0 +1,66 @@
+<%- include("partials/header") %>
+<div class="container">
+	<h1>Edit Blade</h1>
+	<form action="/blades/<%= blade._id %>?_method=PUT" method="post">
+	  <div class="form-group">
+	    <label for="name">Blade Name</label>
+	    <input type="text" class="form-control" name="name" value="<%= blade.name %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="element">Element</label>
+	    <select class="form-control" id="element" name="element">
+			<option disabled>-- Choose Below --</option>
+			<option <%= blade.element === 'fire' ? 'selected' : '' %>>Fire</option>
+			<option <%= blade.element === 'water' ? 'selected' : '' %>>Water</option>
+			<option <%= blade.element === 'ice' ? 'selected' : '' %>>Ice</option>
+			<option <%= blade.element === 'wind' ? 'selected' : '' %>>Wind</option>
+			<option <%= blade.element === 'earth' ? 'selected' : '' %>>Earth</option>
+			<option <%= blade.element === 'electric' ? 'selected' : '' %>>Electric</option>
+			<option <%= blade.element === 'light' ? 'selected' : '' %>>Light</option>
+			<option <%= blade.element === 'dark' ? 'selected' : '' %>>Dark</option>
+		  </select>
+	  </div>
+	  <div class="form-group">
+	    <label for="weapon_class">Weapon Type</label>
+	    <input type="text" class="form-control" name="weapon_class" value="<%= blade.weapon_class %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="description">Description</label>
+	    <input type="text" class="form-control" name="description" value="<%= blade.description %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="illustrator">Illustrator</label>
+	    <input type="text" class="form-control" name="illustrator" value="<%= blade.illustrator %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="role">Role</label>
+	    <input type="text" class="form-control" name="role" value="<%= blade.role %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="voice_actor_en">English Voice Actor</label>
+	    <input type="text" class="form-control" name="voice_actor_en" value="<%= blade.voice_actor_en %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="voice_actor_jp">Japanese Voice Actor</label>
+	    <input type="text" class="form-control" name="voice_actor_jp" value="<%= blade.voice_actor_jp %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="merc_group">Merc Group Name</label>
+	    <input type="text" class="form-control" name="merc_group" value="<%= blade.merc_group %>">
+	  </div>
+	  <div class="form-group">
+	    <label for="aux_slots">Aux Core Slots</label>
+	    <input type="number" class="form-control" name="aux_slots" value="<%= blade.aux_slots %>">
+	  </div>
+	  <div class="form-group form-check">
+	    <input type="checkbox" class="form-check-input" name="gacha" <%= blade.gacha ? 'checked' : '' %>>
+		<label for="gacha">Gacha Blade</label>
+	  </div>
+	  <div class="form-group">
+	    <label for="image">Image Link</label>
+	    <input type="text" class="form-control" name="image_link" value="<%= blade.image_link %>">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>	
+</div>
+<%- include("partials/footer") %>
