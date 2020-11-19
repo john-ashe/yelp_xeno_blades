@@ -13,7 +13,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 // Config Imports
-const config = require('./config');
+try {
+	var config = require('./config');
+} catch (e) {
+	console.log("Could not import config, which probably means your not working locally.");
+	console.log(e);
+}
+
 
 // Route Imports
 const bladeRoutes = require('./routes/blades');
@@ -41,7 +47,13 @@ app.use(morgan('tiny'));
 // CONFIG
 //===================
 // Connect to DB
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+try {
+	mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+} catch(e) {
+	console.log("Could not connect using config. This probably means your not running locally.");
+	mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+}
+
 mongoose.Promise = global.Promise;
 
 // Express Config
@@ -50,7 +62,7 @@ app.use(express.static('public'));
 
 // Express Session Config
 app.use(expressSession({
-	secret: "6refy3wjgryughrkeugrtyrry43ugrfbeufkg47u",
+	secret: process.env.ES_SECRET || config.expressSession.secret,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -83,6 +95,6 @@ app.use("/blades/:id/comments", commentRoutes);
 //===================
 // LISTEN
 //===================
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
 	console.log("yelp_xeno_blades is running");
 })
