@@ -68,6 +68,17 @@ router.get("/search", async (req, res) => {
 	}
 })
 
+//Genre
+router.get("/element/:element", async (req, res) => {
+	const validElements = ["fire", "water", "ice", "wind", "earth", "electric", "light", "dark"];
+	if (validElements.includes(req.params.element.toLowerCase())) {
+		const blades = await Blade.find({element: req.params.element}).exec();
+		res.render("blades", {blades});
+	} else {
+		res.send("Please enter a valid Element");
+	}
+})
+
 // Show
 router.get("/:id", async (req, res) => {
 	try {

@@ -5,6 +5,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
@@ -72,6 +73,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Method Override Config
 app.use(methodOverride('_method'));
+
+// Connect flash
+app.use(flash());
 
 // Passport config
 app.use(passport.initialize());
