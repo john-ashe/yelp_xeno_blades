@@ -40,11 +40,11 @@ router.post("/", isLoggedIn, async (req, res) => {
 	}
 	try {
 		const blade = await Blade.create(newBlade);
-		console.log(blade);
+		req.flash("success", "Blade created");
 		res.redirect("/blades/" + blade._id);
 	} catch (err) {
-		console.log(err);
-		res.send("you broke it... /blades POST")
+		req.flash("error", "Error creating blade");
+		res.redirect("/blades");
 	}
 })
 
@@ -116,10 +116,12 @@ router.put("/:id", checkBladeOwner, async (req, res) => {
 	}
 	try {
 		const blade = await Blade.findByIdAndUpdate(req.params.id, bladeBody, {new: true}).exec();
+		req.flash("success", "Blade updated");
 		res.redirect(`/blades/${req.params.id}`);
 	} catch (err) {
 		console.log(err);
-		res.send("Broken again... /blades/id PUT");
+		req.flash("error", "Error updating blade");
+		res.redirect("/blades");
 	}
 	
 })
@@ -128,11 +130,12 @@ router.put("/:id", checkBladeOwner, async (req, res) => {
 router.delete("/:id", checkBladeOwner, async (req, res) => {
 	try { 
 		const delectedBlade = await Blade.findByIdAndDelete(req.params.id).exec();
-		console.log(delectedBlade);
+		req.flash("success", "Blade deleted");
 		res.redirect("/blades");
 	} catch (err) {
 		console.log(err);
-		res.send("Brokennn /blades/id DELETE");
+		req.flash("error", "Error deleting blade");
+		res.redirect("back");
 	}
 })
 

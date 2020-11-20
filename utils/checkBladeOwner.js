@@ -6,9 +6,11 @@ const checkBladeOwner = async(req, res, next) => {
 		if(blade.owner.id.equals(req.user._id)) {
 			next();
 		} else {
+			req.flash("error", "You don't have permision to do that");
 			res.redirect('back');
 		}
 	} else {
+		req.flash("error", "You must login to do that");
 		res.redirect('/login');
 	}
 }
