@@ -50,10 +50,10 @@
 			</table>
 			<% if (user && user.username === blade.owner.username) { %>
 				<a href="/blades/<%= blade._id %>/edit">
-					<button class="btn btn-outline-info btn-lg btn-block mb-2">Edit</button>
+					<button class="btn btn-info btn-lg btn-block mb-2">Edit</button>
 				</a>
 				<form action="/blades/<%= blade._id %>?_method=DeLETE" method="post">
-					<button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
+					<button type="submit" class="btn btn-danger btn-lg btn-block">Delete</button>
 				</form>
 			<% } %>
 		</div>

@@ -32,3 +32,25 @@
 .show_image-container img {
 	width: 85%;
 }
+
+body {
+	margin: 0;
+	background-color: rgb(111, 178, 248); /* For browsers that do not support gradients */
+	background-image: linear-gradient(to top right, rgb(31, 90, 255), rgb(194, 233, 251));
+}
+
+/* landing page */
+#title {
+	color: rgb(226, 69, 69);
+	font-family: 'Piazzolla', serif;
+	font-style: italic;
+	font-size: 2.7rem;
+	padding-top: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+}
+
+#theButton {
+	margin-top: 70;
+}
