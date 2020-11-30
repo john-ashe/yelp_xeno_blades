@@ -82,11 +82,18 @@ router.get("/element/:element", async (req, res) => {
 });
 
 //Vote
-router.post("/vote", isLoggedIn, (req, res) => {
-	console.log(req.body);
-	res.json({
-		message: "Voted:"
-	});
+router.post("/vote", isLoggedIn, async (req, res) => {
+	console.log("Request body:", req.body);
+	
+	//{
+	//	bladeId: "",
+	//	voteType: ""
+	//}
+	
+	const blade = await Blade.findById(req.body.bladeId)
+	console.log(blade);
+	
+	res.json(blade);
 });
 
 // Show
