@@ -91,9 +91,53 @@ router.post("/vote", isLoggedIn, async (req, res) => {
 	//}
 	
 	const blade = await Blade.findById(req.body.bladeId)
-	console.log(blade);
+	const alreadyUpvoted = blade.upvotes.indexOf(req.user.username) // -1 if not found
+	const alreadyDownvoted = blade.downvotes.indexOf(req.user.username) // -1 if not found
 	
-	res.json(blade);
+	let response = {}
+	if (alreadyDownvoted === -1 && alreadyDownvoted === -1) {
+		if (req.body.voteType === "up") {
+			blade.upvotes.push(req.user.username);
+			blade.save()
+			response.message = "Upvote tallied";
+		} else if (req.body.voteType === "down") {
+			blade.downvotes.push(req.user.username);
+			blade.save()
+			response.message = "Downvote tallied";
+		} else {
+			response.message = "Error 1";
+		}
+	} else if (alreadyUpvoted >= 0) {
+		if (req.body.voteType === "up") {
+			blade.upvotes.splice(alreadyUpvoted, 1);
+			blade.save()
+			response.message = "Upvote removed";
+		} else if (req.body.voteType === "down") {
+			blade.upvotes.splice(alreadyUpvoted, 1);
+			blade.downvotes.push(req.user.username);
+			blade.save()
+			response.message = "Swapped from upvote to downvote";
+		} else {
+			response.message = "Error 2";
+		}
+	} else if (alreadyDownvoted >= 0) {
+		if (req.body.voteType === "up") {
+			blade.downvotes.splice(alreadyDownvoted, 1);
+			blade.upvotes.push(req.user.username);
+			blade.save()
+			response.message = "Swapped from downvote to upvote";
+		} else if (req.body.voteType === "down") {
+			blade.downvotes.splice(alreadyDownvoted, 1);
+			blade.save()
+			response.message = "Downvote removed";
+		} else {
+			response.message = "Error 3";
+		}
+	} else {
+		response.message = "Error 4";
+	}
+	
+	res.json(response);
 });
 
 // Show
