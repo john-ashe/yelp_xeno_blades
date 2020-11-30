@@ -83,6 +83,7 @@ router.get("/element/:element", async (req, res) => {
 
 //Vote
 router.post("/vote", isLoggedIn, (req, res) => {
+	console.log(req.body);
 	res.json({
 		message: "Voted:"
 	});
