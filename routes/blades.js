@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 		console.log(err);
 		res.send("you broke it... /index");
 	}
-})
+});
 
 // Create
 router.post("/", isLoggedIn, async (req, res) => {
@@ -48,7 +48,7 @@ router.post("/", isLoggedIn, async (req, res) => {
 		req.flash("error", "Error creating blade");
 		res.redirect("/blades");
 	}
-})
+});
 
 //New
 router.get("/new", isLoggedIn, (req, res) => {
@@ -68,7 +68,7 @@ router.get("/search", async (req, res) => {
 		console.log(err);
 		res.send("broken search");
 	}
-})
+});
 
 //Genre
 router.get("/element/:element", async (req, res) => {
@@ -79,7 +79,14 @@ router.get("/element/:element", async (req, res) => {
 	} else {
 		res.send("Please enter a valid Element");
 	}
-})
+});
+
+//Vote
+router.post("/vote", isLoggedIn, (req, res) => {
+	res.json({
+		message: "Voted:"
+	});
+});
 
 // Show
 router.get("/:id", async (req, res) => {
@@ -91,13 +98,13 @@ router.get("/:id", async (req, res) => {
 		console.log(err);
 		res.send("you broke it... /blades/:id");
 	}	
-})
+});
 
 // Edit
 router.get("/:id/edit", checkBladeOwner, async (req, res) => {
 	const blade = await Blade.findById(req.params.id).exec();
 	res.render("blades_edit", {blade});
-})
+});
 
 // Update
 router.put("/:id", checkBladeOwner, async (req, res) => {
@@ -126,7 +133,7 @@ router.put("/:id", checkBladeOwner, async (req, res) => {
 		res.redirect("/blades");
 	}
 	
-})
+});
 
 //Delete
 router.delete("/:id", checkBladeOwner, async (req, res) => {
@@ -139,7 +146,7 @@ router.delete("/:id", checkBladeOwner, async (req, res) => {
 		req.flash("error", "Error deleting blade");
 		res.redirect("back");
 	}
-})
+});
 
 
 
