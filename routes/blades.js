@@ -91,51 +91,54 @@ router.post("/vote", isLoggedIn, async (req, res) => {
 	//}
 	
 	const blade = await Blade.findById(req.body.bladeId)
-	const alreadyUpvoted = blade.upvotes.indexOf(req.user.username) // -1 if not found
-	const alreadyDownvoted = blade.downvotes.indexOf(req.user.username) // -1 if not found
+	const alreadyUpvoted = blade.upvotes.indexOf(req.user.username) // -1 = not found
+	const alreadyDownvoted = blade.downvotes.indexOf(req.user.username) // -1 = not found
 	
 	let response = {}
-	if (alreadyDownvoted === -1 && alreadyDownvoted === -1) {
+	if (alreadyUpvoted === -1 && alreadyDownvoted === -1) {
 		if (req.body.voteType === "up") {
 			blade.upvotes.push(req.user.username);
 			blade.save()
-			response.message = "Upvote tallied";
+			response = {message: "Upvote tallied", code: 1};
 		} else if (req.body.voteType === "down") {
 			blade.downvotes.push(req.user.username);
 			blade.save()
-			response.message = "Downvote tallied";
+			response = {message: "Downvote tallied", code: -1};
 		} else {
-			response.message = "Error 1";
+			response = {message: "Error 1", code: "err"};
 		}
 	} else if (alreadyUpvoted >= 0) {
 		if (req.body.voteType === "up") {
 			blade.upvotes.splice(alreadyUpvoted, 1);
 			blade.save()
-			response.message = "Upvote removed";
+			response = {message: "Upvote removed", code: 0};
 		} else if (req.body.voteType === "down") {
 			blade.upvotes.splice(alreadyUpvoted, 1);
 			blade.downvotes.push(req.user.username);
 			blade.save()
-			response.message = "Swapped from upvote to downvote";
+			response = {message: "Swapped from upvote to downvote", code: -1};
 		} else {
-			response.message = "Error 2";
+			response = {message: "Error 2", code: "err"};
 		}
 	} else if (alreadyDownvoted >= 0) {
 		if (req.body.voteType === "up") {
 			blade.downvotes.splice(alreadyDownvoted, 1);
 			blade.upvotes.push(req.user.username);
 			blade.save()
-			response.message = "Swapped from downvote to upvote";
+			response = {message: "Swapped from downvote to upvote", code: 1};
 		} else if (req.body.voteType === "down") {
 			blade.downvotes.splice(alreadyDownvoted, 1);
 			blade.save()
-			response.message = "Downvote removed";
+			response = {message: "Downvote removed", code: 0};
 		} else {
-			response.message = "Error 3";
+			response = {message: "Error 3", code: "err"};
 		}
 	} else {
-		response.message = "Error 4";
+		response = {message: "Error 4", code: "err"};
 	}
+	
+	//Update score
+	response.score = blade.upvotes.length - blade.downvotes.length;
 	
 	res.json(response);
 });
