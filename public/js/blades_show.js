@@ -46,17 +46,17 @@ const handleVote = (newScore, code) => {
 	//Update score
 	score.innerText = newScore;
 	//Update vote button colors	
-	if (code === 0) {
+	if (code === 0) { // no vote
 		upvoteBtn.classList.remove("btn-success");
 		upvoteBtn.classList.add("btn-outline-success");
 		downvoteBtn.classList.remove("btn-danger");
 		downvoteBtn.classList.add("btn-outline-danger");
-	} else if (code === 1) {
+	} else if (code === 1) { // upvote
 		upvoteBtn.classList.remove("btn-outline-success");
 		upvoteBtn.classList.add("btn-success");
 		downvoteBtn.classList.remove("btn-danger");
 		downvoteBtn.classList.add("btn-outline-danger");
-	} else if (code === -1) {
+	} else if (code === -1) { // downvote
 		upvoteBtn.classList.remove("btn-success");
 		upvoteBtn.classList.add("btn-outline-success");
 		downvoteBtn.classList.remove("btn-outline-danger");

@@ -1,3 +1,10 @@
+body {
+	margin: 0;
+	background-color: rgb(111, 178, 248); /* For browsers that do not support gradients */
+	background-image: linear-gradient(to top right, rgb(31, 90, 255), rgb(194, 233, 251));
+}
+
+/* blades */
 .card {
 	border: 1px solid #ddd;
 	border-radius: 1rem;
@@ -31,12 +38,6 @@
 /* show_blades */
 .show_image-container img {
 	width: 85%;
-}
-
-body {
-	margin: 0;
-	background-color: rgb(111, 178, 248); /* For browsers that do not support gradients */
-	background-image: linear-gradient(to top right, rgb(31, 90, 255), rgb(194, 233, 251));
 }
 
 /* landing page */
