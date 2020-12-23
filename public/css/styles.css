@@ -71,3 +71,9 @@ body {
 	width: 100%;
 	height: 20rem;
 }
+
+#label {
+	color: rgb(226, 69, 69);
+	font-family: 'Piazzolla', serif;
+	font-style: italic;
+}
