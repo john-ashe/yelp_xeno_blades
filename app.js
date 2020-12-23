@@ -27,6 +27,7 @@ const bladeRoutes = require('./routes/blades');
 const commentRoutes = require('./routes/comments');
 const mainRoutes = require('./routes/main');
 const authRoutes = require('./routes/auth');
+const cookieRoutes = require('./routes/cookies');
 
 // Model Imports
 const Blade = require('./models/blade');
@@ -100,6 +101,7 @@ app.use("/", mainRoutes);
 app.use("/", authRoutes);
 app.use("/blades", bladeRoutes);
 app.use("/blades/:id/comments", commentRoutes);
+app.use("/cookies", cookieRoutes);
 
 //===================
 // LISTEN
